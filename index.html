@@ -3,25 +3,65 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>小游戏！</title>
+    <title>新年小游戏</title>
     <style>
-        body, html {
-            height: 100%;
-            margin: 0;
+        body {
             display: flex;
             justify-content: center;
             align-items: center;
+            height: 100vh;
+            margin: 0;
+            font-size: 3em;
             font-family: Arial, sans-serif;
-            background-color: #f0f0f0;
         }
-        .center-text {
-            font-size: 48px;
-            color: #333;
-            text-align: center;
+        .char {
+            position: absolute;
+        }
+        #one {
+            left: 0;
+        }
+        #two {
+            left: 1em;
+            top: 1em;
+        }
+        #three {
+            left: 2em;
+            top: 1em;
         }
     </style>
 </head>
 <body>
-    <div class="center-text">小游戏来自ugit!！</div>
+    <div id="one" class="char">一</div>
+    <div id="two" class="char">二</div>
+    <div id="three" class="char">三</div>
+
+    <script>
+        let positions = {
+            '#one': { x: 1, y: 0 },
+            '#two': { x: 0, y: 1 },
+            '#three': { x: 2, y: 1 }
+        };
+
+        const moveCharacter = (elementId, dx, dy) => {
+            const element = document.querySelector(elementId);
+            const position = positions[elementId];
+            position.x += dx;
+            position.y += dy;
+            element.style.left = `${position.x}em`;
+            element.style.top = `${position.y}em`;
+        };
+
+        document.addEventListener('keydown', (event) => {
+            if (event.key === 'ArrowLeft') {
+                moveCharacter('#one', -0.1, 0);
+                moveCharacter('#two', -0.1, 0);
+                moveCharacter('#three', -0.1, 0);
+            } else if (event.key === 'ArrowRight') {
+                moveCharacter('#one', 0.1, 0);
+                moveCharacter('#two', 0.1, 0);
+                moveCharacter('#three', 0.1, 0);
+            }
+        });
+    </script>
 </body>
 </html>
